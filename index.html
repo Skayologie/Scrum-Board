@@ -38,7 +38,7 @@
             <!-- END page-header -->
           </div>
 
-          <div class="ms-auto">
+          <div id="AddTask" class="ms-auto">
             <a
               href="#modal-task"
               data-bs-toggle="modal"
@@ -205,8 +205,78 @@
     <!-- END #app -->
 
     <!-- TASK MODAL -->
-    <div class="modal fade" id="modal-task">
+    <div class="" id="modal-task">
       <!-- Modal content goes here -->
+      <div class=" bg-white w-75 PopUpWindow">
+        <nav class="navbar bg-body-tertiary p-4 pb-0">
+          <div class=" container-fluid">
+            <span class="fs-2 navbar-brand mb-0 h1">Add Task</span>
+            <i id="IconClosePoppup" class="cursor fs-2 fa-solid fa-xmark"></i>
+          </div>
+        </nav>
+        <hr/>
+        <!-- The Form -->
+        <form data-parsley-validate class="gap-4 d-flex flex-column p-4 pt-2">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Title</label>
+            <input data-parsley-minlength="8" data-parsley-minlength-message="You Have To Enter At Least 8 Letters On Title !!" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div>
+            <div class="form-check">
+              <label for="exampleInputEmail1" class="form-label">Type</label>
+              <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Feature
+              </label>
+            </div>
+            <div class="form-check">
+              <input required class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+              <label class="form-check-label" for="flexRadioDefault2">
+                Bug
+              </label>
+            </div>
+          </div>
+
+          <div class="form">
+            <label for="exampleInputEmail1" class="form-label">Priority</label>
+            <select required="" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+              <option disabled selected>Please Select</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="form">
+            <label for="exampleInputEmail1" class="form-label">Status</label>
+            <select required="" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+              <option disabled selected>Please Select</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Date</label>
+            <input required type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="form-floating">
+            <textarea  data-parsley-minlength="10" data-parsley-minlength-message="You Have To Enter At Least 10 Letters On Comment !!"  required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Comments</label>
+          </div>
+
+
+
+          
+          <div class="align">
+            <button id="Cancel" type="reset" class=" btn btn-primary">cancel</button>
+            <button type="submit" class=" btn btn-primary">Submit</button>
+          </div>
+        </form>
+
+
+      </div>
     </div>
 
     <!-- ================== BEGIN core-js ================== -->
@@ -228,6 +298,9 @@ function drop(ev) {
   ev.target.appendChild(document.getElementById(data));
 }
     </script> -->
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/parsley.min.js"></script>
 
     <script src="https://kit.fontawesome.com/352cf65264.js" crossorigin="anonymous"></script>
   </body>
