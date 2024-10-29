@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>YouCode | Scrum Board</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      name="viewport"
+    />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- ================== BEGIN core-css ================== -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link href="assets/css/vendor.min.css" rel="stylesheet" />
+    <link href="assets/css/default/app.min.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- ================== END core-css ================== -->
+  </head>
+  <body>
+
+    <!-- BEGIN #app -->
+    <div id="app" class="app-without-sidebar">
+      <!-- BEGIN #content -->
+      <div id="content" class="app-content main-style">
+
+        <div class="d-flex align-items-center mb-3">
+          <div>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+              <li class="breadcrumb-item active">Scrum Board</li>
+            </ol>
+            <!-- BEGIN page-header -->
+            <h1 class="page-header mb-0">Scrum Board</h1>
+            <!-- END page-header -->
+          </div>
+
+          <div class="ms-auto">
+            <a
+              href="#modal-task"
+              data-bs-toggle="modal"
+              class="btn btn-success btn-rounded px-4 rounded-pill"
+              ><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Add
+              Task</a
+            >
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-xl-4 col-lg-6">
+            <div class="panel panel-inverse">
+              <div class="panel-heading">
+                <h4 class="panel-title">To do (<span id="to-do-tasks-count">5</span>)</h4>
+              </div>
+              <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="to-do-tasks">
+                <!-- TO DO TASKS HERE -->
+                  <!-- The  -->
+                <button class="cardTask d-flex pt-3 pb-3 ">
+                  <div class="TodoIcon m-3 mt-1 ">
+                    <i class="fs-4 text-success fa-regular fa-circle-question"></i>
+                  </div>
+                  <div class="text-start cardContent d-flex flex-column align-items-start w-100 gap-1">
+                    
+                    <div class="h4 mb-0">
+                      Consider creating an acceptance criteria list
+                    </div>
+                    
+                    <div class="">
+                      <div class="text-gray d-flex flex-column align-items-start">#2 created in 2022-10-08</div>
+                      <div class="">
+                        Descriptive requirements are very helpful when it
+                        comes...
+                      </div>
+                    </div>
+
+                    <div class="d-flex justfy-content-start gap-1 ">
+                      <span class="bg-blue text-white p-1 rounded-2 ">High</span>
+                      <span class="bg-gray p-1 rounded-2">Feature</span>
+                    </div>
+                    
+                  </div>
+                </button>
+
+                <button class="cardTask d-flex pt-3 pb-3 ">
+                  <div class="TodoIcon m-3 mt-1 ">
+                    <i class="fs-4 text-success fa-regular fa-circle-question"></i>
+                  </div>
+                  <div class="cardContent d-flex flex-column align-items-start w-100 gap-1">
+                    
+                    <div class="h4 mb-0">
+                      Consider creating an acceptance criteria list
+                    </div>
+                    
+                    <div class="">
+                      <div class="text-gray d-flex flex-column align-items-start">#2 created in 2022-10-08</div>
+                      <div class="">
+                        Descriptive requirements are very helpful when it
+                        comes...
+                      </div>
+                    </div>
+
+                    <div class="d-flex justfy-content-start gap-1 ">
+                      <span class="bg-blue text-white p-1 rounded-2 ">High</span>
+                      <span class="bg-gray p-1 rounded-2">Feature</span>
+                    </div>
+                    
+                  </div>
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-6">
+            <div class="panel panel-inverse">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  In Progress (<span id="in-progress-tasks-count">4</span>)
+                </h4>
+              </div>
+              <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="in-progress-tasks">
+                <!-- IN PROGRESS TASKS HERE -->
+             
+                <button class="cardTask d-flex pt-3 pb-3 ">
+                  <div class="TodoIcon m-3 mt-1 ">
+                    <i class="fs-4 text-success fa-solid fa-spinner"></i>
+                  </div>
+                  <div class="cardContent d-flex flex-column align-items-start w-100 gap-1">
+                    
+                    <div class="h4 mb-0">
+                      Consider creating an acceptance criteria list
+                    </div>
+                    
+                    <div class="">
+                      <div class="text-gray d-flex flex-column align-items-start">#2 created in 2022-10-08</div>
+                      <div class="">
+                        including as many details as possible.
+                      </div>
+                    </div>
+
+                    <div class="d-flex justfy-content-start gap-1 ">
+                      <span class="bg-blue text-white p-1 rounded-2 ">High</span>
+                      <span class="bg-gray p-1 rounded-2">Bug</span>
+                    </div>
+                    
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-6">
+            <div class="panel panel-inverse">
+              <div class="panel-heading">
+                <h4 class="panel-title">Done (<span id="done-tasks-count">4</span>)</h4>
+              </div>
+              <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="done-tasks">
+                <!-- DONE TASKS HERE -->
+                <button class="cardTask d-flex pt-3 pb-3 ">
+                  <div class="TodoIcon m-3 mt-1 ">
+                    <i class="fs-4 text-success fa-solid fa-circle-check"></i>
+                  </div>
+                  <div class="cardContent d-flex flex-column align-items-start w-100 gap-1">
+                    
+                    <div class="h4 mb-0">
+                      Consider creating an acceptance criteria list
+                    </div>
+                    
+                    <div class="">
+                      <div class="text-gray d-flex flex-column align-items-start">#2 created in 2022-10-08</div>
+                      <div class="">
+                        including as many details as possible.
+                      </div>
+                    </div>
+
+                    <div class="d-flex justfy-content-start gap-1 ">
+                      <span class="bg-blue text-white p-1 rounded-2 ">High</span>
+                      <span class="bg-gray p-1 rounded-2">Bug</span>
+                    </div>
+                    
+                  </div>
+                </button>
+                
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- END #content -->
+
+      <!-- BEGIN scroll-top-btn -->
+      <a
+        href="javascript:;"
+        class="btn btn-icon btn-circle btn-success btn-scroll-to-top"
+        data-toggle="scroll-to-top"
+        ><i class="fa fa-angle-up"></i
+      ></a>
+      <!-- END scroll-top-btn -->
+    </div>
+    <!-- END #app -->
+
+    <!-- TASK MODAL -->
+    <div class="modal fade" id="modal-task">
+      <!-- Modal content goes here -->
+    </div>
+
+    <!-- ================== BEGIN core-js ================== -->
+    <script src="assets/js/script.js"></script>
+    <!-- ================== END core-js ================== -->
+<!-- 
+    <script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+    </script> -->
+
+    <script src="https://kit.fontawesome.com/352cf65264.js" crossorigin="anonymous"></script>
+  </body>
+</html>
