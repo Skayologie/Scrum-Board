@@ -49,3 +49,16 @@
     user-select: none;
     cursor: pointer;
 }
+label{
+    font-size: 1.1rem;
+}
+.div1{
+    gap: 8px;
+    margin: 10px;
+}
+
+
+.Trash{
+    background-color: red;
+    display: none;
+}

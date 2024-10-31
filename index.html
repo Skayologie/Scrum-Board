@@ -31,7 +31,7 @@
           <div>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-              <li class="breadcrumb-item active">Scrum Board</li>
+              <li id="HelloScrum" class="breadcrumb-item active">Scrum Board</li>
             </ol>
             <!-- BEGIN page-header -->
             <h1 class="page-header mb-0">Scrum Board</h1>
@@ -53,79 +53,28 @@
 
           <div class="col-xl-4 col-lg-6">
             <div class="panel panel-inverse">
-              <div class="panel-heading">
+              <div class="panel-heading bg-secondary">
                 <h4 class="panel-title">To do (<span id="to-do-tasks-count">5</span>)</h4>
               </div>
               <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="to-do-tasks">
                 <!-- TO DO TASKS HERE -->
                   <!-- The  -->
-                <button class="cardTask d-flex pt-3 pb-3 ">
-                  <div class="TodoIcon m-3 mt-1 ">
-                    <i class="fs-4 text-success fa-regular fa-circle-question"></i>
-                  </div>
-                  <div class="text-start cardContent d-flex flex-column align-items-start w-100 gap-1">
-                    
-                    <div class="h4 mb-0">
-                      Consider creating an acceptance criteria list
-                    </div>
-                    
-                    <div class="">
-                      <div class="text-gray d-flex flex-column align-items-start">#2 created in 2022-10-08</div>
-                      <div class="">
-                        Descriptive requirements are very helpful when it
-                        comes...
-                      </div>
-                    </div>
-
-                    <div class="d-flex justfy-content-start gap-1 ">
-                      <span class="bg-blue text-white p-1 rounded-2 ">High</span>
-                      <span class="bg-gray p-1 rounded-2">Feature</span>
-                    </div>
-                    
-                  </div>
-                </button>
-
-                <button class="cardTask d-flex pt-3 pb-3 ">
-                  <div class="TodoIcon m-3 mt-1 ">
-                    <i class="fs-4 text-success fa-regular fa-circle-question"></i>
-                  </div>
-                  <div class="cardContent d-flex flex-column align-items-start w-100 gap-1">
-                    
-                    <div class="h4 mb-0">
-                      Consider creating an acceptance criteria list
-                    </div>
-                    
-                    <div class="">
-                      <div class="text-gray d-flex flex-column align-items-start">#2 created in 2022-10-08</div>
-                      <div class="">
-                        Descriptive requirements are very helpful when it
-                        comes...
-                      </div>
-                    </div>
-
-                    <div class="d-flex justfy-content-start gap-1 ">
-                      <span class="bg-blue text-white p-1 rounded-2 ">High</span>
-                      <span class="bg-gray p-1 rounded-2">Feature</span>
-                    </div>
-                    
-                  </div>
-                </button>
-
+               
               </div>
             </div>
           </div>
 
           <div class="col-xl-4 col-lg-6">
             <div class="panel panel-inverse">
-              <div class="panel-heading">
+              <div class="bg-primary panel-heading">
                 <h4 class="panel-title">
-                  In Progress (<span id="in-progress-tasks-count">4</span>)
+                  Doing (<span id="in-progress-tasks-count">4</span>)
                 </h4>
               </div>
               <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="in-progress-tasks">
                 <!-- IN PROGRESS TASKS HERE -->
              
-                <button class="cardTask d-flex pt-3 pb-3 ">
+                <!-- <button class="cardTask d-flex pt-3 pb-3 ">
                   <div class="TodoIcon m-3 mt-1 ">
                     <i class="fs-4 text-success fa-solid fa-spinner"></i>
                   </div>
@@ -148,19 +97,19 @@
                     </div>
                     
                   </div>
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
 
           <div class="col-xl-4 col-lg-6">
             <div class="panel panel-inverse">
-              <div class="panel-heading">
+              <div id="panelHeading" class="bg-success panel-heading">
                 <h4 class="panel-title">Done (<span id="done-tasks-count">4</span>)</h4>
               </div>
-              <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="done-tasks">
+              <div id="div3" class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="done-tasks">
                 <!-- DONE TASKS HERE -->
-                <button class="cardTask d-flex pt-3 pb-3 ">
+                <!-- <button class="cardTask d-flex pt-3 pb-3 ">
                   <div class="TodoIcon m-3 mt-1 ">
                     <i class="fs-4 text-success fa-solid fa-circle-check"></i>
                   </div>
@@ -184,7 +133,7 @@
                     
                   </div>
                 </button>
-                
+                 -->
               </div>
             </div>
           </div>
@@ -207,7 +156,7 @@
     <!-- TASK MODAL -->
     <div class="" id="modal-task">
       <!-- Modal content goes here -->
-      <div class=" bg-white w-75 PopUpWindow">
+      <div class="bg-white w-75 PopUpWindow">
         <nav class="navbar bg-body-tertiary p-4 pb-0">
           <div class=" container-fluid">
             <span class="fs-2 navbar-brand mb-0 h1">Add Task</span>
@@ -216,62 +165,67 @@
         </nav>
         <hr/>
         <!-- The Form -->
-        <form data-parsley-validate class="gap-4 d-flex flex-column p-4 pt-2">
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Title</label>
-            <input data-parsley-minlength="8" data-parsley-minlength-message="You Have To Enter At Least 8 Letters On Title !!" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-
-          <div>
-            <div class="form-check">
-              <label for="exampleInputEmail1" class="form-label">Type</label>
-              <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-              <label class="form-check-label" for="flexRadioDefault1">
-                Feature
-              </label>
+        <form id="PoppupForm" action="./index.html" data-parsley-validate class="gap-4 d-flex flex-column p-4 pt-2">
+          
+          <div id="PoppUpContainer">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" aria-autocomplete="both" class="form-label">Title</label>
+              <input data-parsley-minlength="8" data-parsley-minlength-message="You Have To Enter At Least 8 Letters On Title !!" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
-            <div class="form-check">
-              <input required class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-              <label class="form-check-label" for="flexRadioDefault2">
-                Bug
-              </label>
+  
+            <div>
+              <label  for="exampleInputEmail1 " class="form-label ">Type</label>
+              <div class="form-check gap-2 d-flex ">
+                <input required class="form-check-input align-self-center" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Feature
+                </label>
+              </div>
+              <div>
+                <div class="form-check gap-2 d-flex">
+                  <input required class="form-check-input align-self-center" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Bug
+                  </label>
+                </div>
+              </div>
+            </div>
+  
+            <div class="form">
+              <label for="exampleInputEmail1" class="form-label">Priority</label>
+              <select  class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                <option disabled selected>Please Select</option>
+                <option required value="High">High</option>
+                <option required value="Medium">Medium</option>
+                <option required value="Low">Low</option>
+              </select>
+            </div>
+            <div class="form">
+              <label for="exampleInputEmail1" class="form-label">Status</label>
+              <select required class="form-select" id="floatingSelect2" aria-label="Floating label select example">
+                <option disabled selected>Please Select</option>
+                <option required value="Yet">Not Yet</option>
+                <option required value="Doing">Doing</option>
+                <option required value="Done">Done</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Date</label>
+              <input required type="date" class="form-control" id="Date" aria-describedby="emailHelp">
+            </div>
+  
+            <div class="form-label">
+              <label>Comments</label>
+              <textarea  data-parsley-minlength="10" data-parsley-minlength-message="You Have To Enter At Least 10 Letters On Comment !!"  required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
             </div>
           </div>
-
-          <div class="form">
-            <label for="exampleInputEmail1" class="form-label">Priority</label>
-            <select required="" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-              <option disabled selected>Please Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="form">
-            <label for="exampleInputEmail1" class="form-label">Status</label>
-            <select required="" class="form-select" id="floatingSelect2" aria-label="Floating label select example">
-              <option disabled selected>Please Select</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Date</label>
-            <input required type="date" class="form-control" id="Date" aria-describedby="emailHelp">
-          </div>
-
-          <div class="form-floating">
-            <textarea  data-parsley-minlength="10" data-parsley-minlength-message="You Have To Enter At Least 10 Letters On Comment !!"  required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-            <label for="floatingTextarea">Comments</label>
-          </div>
-
-
 
           
           <div class="align">
             <button id="Cancel" type="reset" class=" btn btn-primary">cancel</button>
-            <button type="submit" id="SubmitTheTask" disabled class=" btn btn-primary">Submit</button>
+            <button id="SubmitTheTask"  type="submit" class=" btn btn-primary">Submit</button>
+            <button id="DeleteTheTask"  type="submit" class=" btn btn-danger d-none">Delete</button>
+            <button id="UpdateTheTask"  type="submit" class=" btn btn-secondary d-none">Update</button>
           </div>
         </form>
 
@@ -282,22 +236,7 @@
     <!-- ================== BEGIN core-js ================== -->
     <script src="assets/js/script.js"></script>
     <!-- ================== END core-js ================== -->
-<!-- 
-    <script>
-function allowDrop(ev) {
-  ev.preventDefault();
-}
 
-function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-}
-    </script> -->
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/jquery.min.js"></script>
     <script src="./assets/js/parsley.min.js"></script>
