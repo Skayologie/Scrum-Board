@@ -10,30 +10,47 @@
   const cardTask = document.getElementsByClassName("cardTask")
   const PoppUpContainer = document.getElementById("PoppUpContainer")
   const floatingTextarea = document.getElementById("floatingTextarea")
-  const InputValue = document.querySelectorAll("input[required]").values
+  const InputValue = document.querySelectorAll("*[data-req='Req']")
   const TheTitleInput = document.getElementById("exampleInputEmail1")
   const TodoTaskCount = document.getElementById("to-do-tasks-count");
+  let radioSelected , prioritySelected ;
 
 
-// Create The Main ID in our localStorage if not exist
+  // Create The Main ID in our localStorage if not exist
   if (localStorage.getItem("id") == null) {
     localStorage.setItem("id",0)
   }
 
 
-// SHOW CURRENT DATE IN INPUT DATE
-  const today = new Date().toISOString().split("T")[0];
-  document.getElementById("Date").value = today;
-
 ///////////////////////////////  Global Functions  ///////////////////////////////////////////
 //----------------- The Submit Button Mode(Disable , Enable ) Function ---------------------//
-  function DisableAbleSubmitButton(TheInput){
-    if (TheInput.value.length >= 8) {
+  poppup.addEventListener("input", (e)=>{
+    if (e.target.id === "exampleInputEmail1" || e.target.id === "floatingTextarea") {
+      let Value = e.target.value
+      let minLength = e.target.attributes[0].value
+      if(Value.length >= minLength){
         SubmitTheTask.disabled = false
-    }else if (TheInput.value.length < 8) {
+      }else{
         SubmitTheTask.disabled = true
-  }}
-//------------------------------------------------------------------------------------------//
+      }
+    }
+  })
+
+
+
+//----------------- The radio check Selected ---------------------//
+  function RadioChecked(){
+    if (document.getElementById("flexRadioDefault1").checked == true) {
+      radioSelected = "Feature";
+      return 1 ;
+      
+    }else if(document.getElementById("flexRadioDefault2").checked == true){
+      radioSelected = "Bug";
+      return 1 ;
+    }else{
+      return 0 ;
+    }
+  }
 
 
 //----------------------- The PoppUp Generale Function -------------------------------------//
@@ -43,6 +60,7 @@
     if (status === "flex") {
       document.getElementById("DeleteTheTask").classList.add("d-none")
       document.getElementById("SubmitTheTask").classList.remove("d-none")
+      document.getElementById("UpdateTheTask").classList.add("d-none")
       PoppUpContainer.innerHTML = `
       <div class="mb-3">
             <label for="exampleInputEmail1" aria-autocomplete="both" class="form-label">Title</label>
@@ -92,10 +110,9 @@
 
           <div class="form-label">
             <label>Comments</label>
-            <textarea  data-parsley-minlength="10" data-parsley-minlength-message="You Have To Enter At Least 10 Letters On Comment !!"  required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+            <textarea data-parsley-minlength="10"  value="" data-parsley-minlength-message="You Have To Enter At Least 8 Letters On Comment !!"  required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
           </div>
       `
-      
     }
   }
 //------------------------------------------------------------------------------------------//
@@ -113,56 +130,73 @@
   Cancel.onclick = () => PoppUp("none");
 //------------------------------------------------------------------------------------------//
 
-//-------------- The Submit Button Mode Use for anable The Submit btn ----------------------//
-  floatingTextarea.onkeyup = () => DisableAbleSubmitButton(floatingTextarea)
-  TheTitleInput.onkeyup = () => DisableAbleSubmitButton(floatingTextarea)
-//------------------------------------------------------------------------------------------//
-
-
 //---------------- Event to Handle Click For Add Tasks To Local Storage -------------------//
 SubmitTheTask.onclick = () =>{
-  /* 
-  This Id Variable For Get "id" Item From Local storage That Already exist ,
-  and Defined by 0 as begin value
-  */
-  let id = parseInt(localStorage.getItem("id")) 
-  // increment The Value Of The Id When the user clicked over submit button 
-  localStorage.setItem("id", id += 1)
-
-  // create an Task Object That include All Details Of One Task
-  const Task = {
-      id: id ,
-      title:  document.getElementById("exampleInputEmail1").value,
-      priority: document.getElementById("floatingSelect").value,
-      status:  document.getElementById("floatingSelect2").value,
-      date: document.getElementById("Date").value,
-      comment: document.getElementById("floatingTextarea").value
+  // After The User filling data and press submit this etape is checking if all feilds are filled successfully 
+  // And If one input is not filled its nod will add to the localstorage
+  // check the select options
+  if (document.getElementById("floatingSelect").value === "Please Select") {
+    return
   }
-  // Stock The Task Object On The Local Storage With the JSON Stringify Method For Send The
-  // Javascript Object As String to the web server And Manipulate it
-  localStorage.setItem("task_"+Task.id, JSON.stringify(Task))
-}
-//------------------------------------------------------------------------------------------//
-//---------------- Event to Handle Click For Update Tasks To Local Storage --------------------//
-function RemoveWithId(id){
-  let key = "task_"+id
-  console.log(JSON.parse(localStorage.getItem(key)))
-  localStorage.removeItem(key)
-  poppup.style.display = "flex"
-}
-function ConfirmationPoppup(id){
-      poppup.style.display = "flex"
-      document.getElementById("DeleteTheTask").classList.remove("d-none")
-      document.getElementById("SubmitTheTask").classList.add("d-none")
-      PoppUpContainer.innerHTML = `<label for="exampleInputEmail1" aria-autocomplete="both" class="form-label">Delete item Number ${id} ??</label> `
-      document.getElementById("DeleteTheTask").onclick = () =>{
-        RemoveWithId(id)
+  if (document.getElementById("floatingSelect2").value === "Please Select") {
+    return
+  }
+  // check the date options
+  if (document.getElementById("Date").value === "") {
+    return
+  }
+  // check the TextArea options
+  if (document.getElementById("floatingTextarea").value === "") {
+    return
+  }
+  // check the Radio options With a function That return 0 is its not checked And 1 if checked
+  if (RadioChecked() === 0 ) {
+    return
+  }else{
+      /* 
+      This Id Variable For Get "id" Item From Local storage That Already exist ,
+      and Defined by 0 as begin value
+      */
+      let id = parseInt(localStorage.getItem("id")) 
+      // increment The Value Of The Id When the user clicked over submit button 
+      localStorage.setItem("id", id += 1)
+
+      // create an Task Object That include All Details Of One Task
+      const Task = {
+          id: id ,
+          title:  document.getElementById("exampleInputEmail1").value,
+          priority: document.getElementById("floatingSelect").value,
+          type: radioSelected,
+          status:  document.getElementById("floatingSelect2").value,
+          date: document.getElementById("Date").value,
+          comment: document.getElementById("floatingTextarea").value
       }
-}
+      // Stock The Task Object On The Local Storage With the JSON Stringify Method For Send The
+      // Javascript Object As String to the web server And Manipulate it
+      localStorage.setItem("task_"+Task.id, JSON.stringify(Task)) 
+    }
+  }
+ 
+//------------------------------------------------------------------------------------------//
+//---------------- Event to Handle Click For Delete Tasks From Local Storage --------------------//
+  function RemoveWithId(id){
+    let key = "task_"+id
+    localStorage.removeItem(key)
+  }
+
+//---------------- Poppup Delete Confirmation --------------------//
+  function ConfirmationPoppup(id){
+        poppup.style.display = "flex"
+        document.getElementById("DeleteTheTask").classList.remove("d-none")
+        document.getElementById("SubmitTheTask").classList.add("d-none")
+        document.getElementById("UpdateTheTask").classList.add("d-none")
+        PoppUpContainer.innerHTML = `<label for="exampleInputEmail1" aria-autocomplete="both" class="form-label">Delete item Number ${id} ??</label> `
+        document.getElementById("DeleteTheTask").onclick = () =>{
+          RemoveWithId(id)
+        }
+  }
 
 //------------------------------------------------------------------------------------------//
-
-
 // Declare And Define Task Counter of each Col ( Done(0) , Doing(0) , Not yet(0) )
 let CounterTodo = 0;
 let CounterDoing = 0;
@@ -204,30 +238,24 @@ document.getElementById("done-tasks-count").innerText = CounterDone
 // Column param like Doing , yet or done column to change there conter task To th current Number of the task
 function TheCardButtonContent(column,icon){
           column.innerHTML += `
-                <button id="${theObjectTask.id}" class="cardTask d-flex pt-3 pb-3 ">
-                  <div class="TodoIcon m-3 mt-1 ">
+                <a  id="${theObjectTask.id}" href="#" class="list-group-item d-flex">
+                  <div class="TodoIcon m-4 mt-1 ">
                     <i class="fs-4 text-success fa-regular ${icon}"></i>
                   </div>
-                  <div class="cardContent d-flex flex-column align-items-start w-100 gap-1">
-                    
-                    <div class="h4 mb-0">
-                      ${theObjectTask.title}
+                  <div class="flex-fill">
+                    <div  onclick="update(${theObjectTask.id})" class="fs-14px lh-12 mb-2px fw-bold text-dark">${theObjectTask.title}</div>
+                    <div class="mb-1 fs-12px">
+                      <div class="text-gray-600 flex-1">#${theObjectTask.id} opened ${theObjectTask.date} days ago by profile</div>
                     </div>
-                    
-                    <div class="">
-                      <div class="text-gray d-flex flex-column align-items-start">#${theObjectTask.id} created in ${theObjectTask.date}</div>
-                      <div class="d-flex justify-content-start">${theObjectTask.comment}</div>
-                    </div>
-
-                    <div class="d-flex justfy-content-start gap-1 ">
-                      <span class="bg-blue text-white p-1 rounded-2 ">${theObjectTask.priority}</span>
-                      <span class="bg-gray p-1 rounded-2">${theObjectTask.priority}</span>
+                    <div class="mb-1">
+                      <span class="badge bg-gray-300 text-gray-900">${theObjectTask.priority}</span>
+                      <span class="badge bg-indigo">${theObjectTask.type}</span>
                     </div>
                   </div>
                   <div onclick=ConfirmationPoppup(${theObjectTask.id}) id="Remove${theObjectTask.id}" class="align-self-center RemoveTask TodoIcon m-3 mt-1 ">
                     <i class="fs-4 text-red fa-solid fa-trash"></i>
                   </div>
-                </button>
+                </a>
         `;
 }
 
