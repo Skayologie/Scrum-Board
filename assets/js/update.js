@@ -2,8 +2,7 @@
 
 const UpdateBtn = document.getElementById("UpdateTheTask")
 const update = function (id){
-    
-  
+    document.getElementById("TitlePrompt").innerHTML = "Update Task Number "+id
 
     let key = "task_"+id
     let localStorageItems = JSON.parse(localStorage.getItem(key))

@@ -61,6 +61,8 @@
       document.getElementById("DeleteTheTask").classList.add("d-none")
       document.getElementById("SubmitTheTask").classList.remove("d-none")
       document.getElementById("UpdateTheTask").classList.add("d-none")
+      document.getElementById("TitlePrompt").innerHTML = "Add Task"
+
       PoppUpContainer.innerHTML = `
       <div class="mb-3">
             <label for="exampleInputEmail1" aria-autocomplete="both" class="form-label">Title</label>
@@ -190,6 +192,8 @@ SubmitTheTask.onclick = () =>{
         document.getElementById("DeleteTheTask").classList.remove("d-none")
         document.getElementById("SubmitTheTask").classList.add("d-none")
         document.getElementById("UpdateTheTask").classList.add("d-none")
+        document.getElementById("TitlePrompt").innerText = "Sure ?"
+
         PoppUpContainer.innerHTML = `<label for="exampleInputEmail1" aria-autocomplete="both" class="form-label">Delete item Number ${id} ??</label> `
         document.getElementById("DeleteTheTask").onclick = () =>{
           RemoveWithId(id)
