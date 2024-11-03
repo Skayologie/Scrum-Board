@@ -241,6 +241,17 @@ document.getElementById("done-tasks-count").innerText = CounterDone
 // Function That Added A content If The User Add A task This Function Take Two Params 
 // Column param like Doing , yet or done column to change there conter task To th current Number of the task
 function TheCardButtonContent(column,icon){
+
+          var date1 = new Date(theObjectTask.date);
+          var date2 = new Date();
+          var diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24), 10);
+          var message = "Days Ago"
+          
+          console.log(diffDays)
+
+          if (diffDays <= 1 ) {
+            var message = "Days Left"
+          }
           column.innerHTML += `
                 <a  id="${theObjectTask.id}" href="#" class="list-group-item d-flex">
                   <div class="TodoIcon m-4 mt-1 ">
@@ -249,7 +260,7 @@ function TheCardButtonContent(column,icon){
                   <div class="flex-fill">
                     <div  onclick="update(${theObjectTask.id})" class="fs-14px lh-12 mb-2px fw-bold text-dark">${theObjectTask.title}</div>
                     <div class="mb-1 fs-12px">
-                      <div class="text-gray-600 flex-1">#${theObjectTask.id} opened ${theObjectTask.date} days ago by profile</div>
+                      <div class="text-gray-600 flex-1">#${theObjectTask.id} <br> ${diffDays} ${message}<br> by Jawad Boulmal</div>
                     </div>
                     <div class="mb-1">
                       <span class="badge bg-gray-300 text-gray-900">${theObjectTask.priority}</span>
@@ -260,6 +271,6 @@ function TheCardButtonContent(column,icon){
                     <i class="fs-4 text-red fa-solid fa-trash"></i>
                   </div>
                 </a>
-        `;
+                `;
 }
 
