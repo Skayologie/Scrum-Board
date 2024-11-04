@@ -65,6 +65,8 @@ The primary objective of **Scrum Board** is to offer an easy-to-use, responsive 
    cd Scrum-Board
 3. Open the `index.html` file in your browser to run the application locally.
 
+4. Ou entrez sur le site suivant [Scrum Board Website](https://jawadboulmal.com/ScrumBoard/) Pour l'utiliser .
+
 ## Usage 🚀
 - **Adding Tasks:** Click "Add Task" to open the modal. Fill in the required fields and submit.
 - **Editing Tasks:** Click on a task to edit it in the modal.
