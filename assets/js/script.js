@@ -208,17 +208,21 @@ let CounterDone = 0;
 
 function Emptymsg(sel , count){
   if (count === 0) {
+    document.getElementById(sel).classList.add("d-flex")
     document.getElementById(sel).classList.remove("d-none")
   }else{
+    document.getElementById(sel).classList.remove("d-flex")
     document.getElementById(sel).classList.add("d-none")
-
   }
 }
+window.addEventListener("mouseover",()=>{
+  Emptymsg("emptyMsg1", CounterTodo)
+  Emptymsg("emptyMsg2", CounterDoing)
+  Emptymsg("emptyMsg3", CounterDone)
+})
 // loop The Local storage Data , 
 for (let i = 0; i < localStorage.length; i++) {
-    Emptymsg("emptyMsg1", CounterTodo)
-    Emptymsg("emptyMsg2", CounterDoing)
-    Emptymsg("emptyMsg3", CounterDone)
+
     let key = localStorage.key(i);
     // Get the All Items And Filter Them With | startWith method for separate the Values That begin with task_ 
     if (key.startsWith("task_")) {
@@ -257,8 +261,6 @@ function TheCardButtonContent(column,icon){
           var diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24), 10);
           var message = "Days Ago"
           
-          console.log(diffDays)
-
           if (diffDays <= 1 ) {
             var message = "Days Left"
           }
