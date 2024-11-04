@@ -62,3 +62,15 @@ label{
     background-color: red;
     display: none;
 }
+
+#emptyMsg1 , #emptyMsg2 , #emptyMsg3{
+    background-color: rgb(255, 255, 255);
+    height: 100px;
+    width: 100%;
+    display: flex   ;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: rgb(173, 173, 173);
+}

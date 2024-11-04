@@ -206,9 +206,19 @@ let CounterTodo = 0;
 let CounterDoing = 0;
 let CounterDone = 0;
 
+function Emptymsg(sel , count){
+  if (count === 0) {
+    document.getElementById(sel).classList.remove("d-none")
+  }else{
+    document.getElementById(sel).classList.add("d-none")
 
+  }
+}
 // loop The Local storage Data , 
 for (let i = 0; i < localStorage.length; i++) {
+    Emptymsg("emptyMsg1", CounterTodo)
+    Emptymsg("emptyMsg2", CounterDoing)
+    Emptymsg("emptyMsg3", CounterDone)
     let key = localStorage.key(i);
     // Get the All Items And Filter Them With | startWith method for separate the Values That begin with task_ 
     if (key.startsWith("task_")) {
@@ -241,7 +251,7 @@ document.getElementById("done-tasks-count").innerText = CounterDone
 // Function That Added A content If The User Add A task This Function Take Two Params 
 // Column param like Doing , yet or done column to change there conter task To th current Number of the task
 function TheCardButtonContent(column,icon){
-
+          
           var date1 = new Date(theObjectTask.date);
           var date2 = new Date();
           var diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24), 10);
@@ -253,7 +263,7 @@ function TheCardButtonContent(column,icon){
             var message = "Days Left"
           }
           column.innerHTML += `
-                <a  id="${theObjectTask.id}" href="#" class="list-group-item d-flex">
+                <a draggable="true" id="${theObjectTask.id}" href="#" class="list-group-item d-flex taskItem">
                   <div class="TodoIcon m-4 mt-1 ">
                     <i class="fs-4 text-success fa-regular ${icon}"></i>
                   </div>
@@ -270,7 +280,6 @@ function TheCardButtonContent(column,icon){
                   <div onclick=ConfirmationPoppup(${theObjectTask.id}) id="Remove${theObjectTask.id}" class="align-self-center RemoveTask TodoIcon m-3 mt-1 ">
                     <i class="fs-4 text-red fa-solid fa-trash"></i>
                   </div>
-                </a>
-                `;
+                </a>`;
 }
 
