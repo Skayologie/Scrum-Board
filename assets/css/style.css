@@ -83,3 +83,20 @@ label{
         transform: translateY(0px);
     }
 }
+
+#TrashButtonUnder{
+    background-color: white;
+    border: 1px solid red;
+    display: flex;
+    width:min-content;
+    position: absolute;
+    padding: 20px;
+    border-radius: 50%;
+    bottom: 0px;
+    left: 0px;
+    margin: 30px;
+}
+.TrashButtonUnder i{
+    font-size: 100px ;
+   margin: 0px !important;
+}
