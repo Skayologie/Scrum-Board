@@ -28,7 +28,7 @@
     border-radius: 10px;
     max-width: 500px;
     height: fit-content;
-    
+    animation: PoppupAnimation .5s ease-in-out;
 }
 
 .align{
@@ -73,4 +73,13 @@ label{
     align-items: center;
     font-size: 1.5rem;
     color: rgb(173, 173, 173);
+}
+
+@keyframes PoppupAnimation {
+    0%{
+        transform: translateY(100px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
 }

@@ -57,6 +57,7 @@
   function PoppUp(status) {
     poppup.style.display = status
 
+    
     if (status === "flex") {
       document.getElementById("DeleteTheTask").classList.add("d-none")
       document.getElementById("SubmitTheTask").classList.remove("d-none")
@@ -133,7 +134,7 @@
 //------------------------------------------------------------------------------------------//
 
 //---------------- Event to Handle Click For Add Tasks To Local Storage -------------------//
-SubmitTheTask.onclick = () =>{
+SubmitTheTask.addEventListener("click",(e)=>{  
   // After The User filling data and press submit this etape is checking if all feilds are filled successfully 
   // And If one input is not filled its nod will add to the localstorage
   // check the select options
@@ -155,30 +156,33 @@ SubmitTheTask.onclick = () =>{
   if (RadioChecked() === 0 ) {
     return
   }else{
-      /* 
-      This Id Variable For Get "id" Item From Local storage That Already exist ,
-      and Defined by 0 as begin value
-      */
-      let id = parseInt(localStorage.getItem("id")) 
-      // increment The Value Of The Id When the user clicked over submit button 
-      localStorage.setItem("id", id += 1)
 
-      // create an Task Object That include All Details Of One Task
-      const Task = {
-          id: id ,
-          title:  document.getElementById("exampleInputEmail1").value,
-          priority: document.getElementById("floatingSelect").value,
-          type: radioSelected,
-          status:  document.getElementById("floatingSelect2").value,
-          date: document.getElementById("Date").value,
-          comment: document.getElementById("floatingTextarea").value
-      }
-      // Stock The Task Object On The Local Storage With the JSON Stringify Method For Send The
-      // Javascript Object As String to the web server And Manipulate it
-      localStorage.setItem("task_"+Task.id, JSON.stringify(Task)) 
+        /* 
+          This Id Variable For Get "id" Item From Local storage That Already exist ,
+          and Defined by 0 as begin value
+          */
+          let id = parseInt(localStorage.getItem("id")) 
+          // increment The Value Of The Id When the user clicked over submit button 
+          localStorage.setItem("id", id += 1)
+
+          // create an Task Object That include All Details Of One Task
+          const Task = {
+              id: id ,
+              title:  document.getElementById("exampleInputEmail1").value,
+              priority: document.getElementById("floatingSelect").value,
+              type: radioSelected,
+              status:  document.getElementById("floatingSelect2").value,
+              date: document.getElementById("Date").value,
+              comment: document.getElementById("floatingTextarea").value
+          }
+          // Stock The Task Object On The Local Storage With the JSON Stringify Method For Send The
+          // Javascript Object As String to the web server And Manipulate it
+
+            localStorage.setItem("task_"+Task.id, JSON.stringify(Task)) 
     }
-  }
- 
+  })
+      
+
 //------------------------------------------------------------------------------------------//
 //---------------- Event to Handle Click For Delete Tasks From Local Storage --------------------//
   function RemoveWithId(id){
@@ -215,11 +219,7 @@ function Emptymsg(sel , count){
     document.getElementById(sel).classList.add("d-none")
   }
 }
-window.addEventListener("mouseover",()=>{
-  Emptymsg("emptyMsg1", CounterTodo)
-  Emptymsg("emptyMsg2", CounterDoing)
-  Emptymsg("emptyMsg3", CounterDone)
-})
+
 // loop The Local storage Data , 
 for (let i = 0; i < localStorage.length; i++) {
 
@@ -284,4 +284,6 @@ function TheCardButtonContent(column,icon){
                   </div>
                 </a>`;
 }
+
+
 
